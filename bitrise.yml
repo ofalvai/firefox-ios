@@ -572,6 +572,7 @@ workflows:
     steps:
     - script@1:
         title: Files changed in commit
+        run_if: "false"
         inputs:
         - content: |-
             #!/usr/bin/env bash
@@ -630,7 +631,7 @@ workflows:
             fi
     - share-pipeline-variable@1:
         inputs:
-        - variables: RUN_UI_TESTS
+        - variables: RUN_UI_TESTS=Run_UI_Tests
   NewXcodeVersions:
     steps:
     - script@1:
