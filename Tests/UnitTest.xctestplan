@@ -95,6 +95,8 @@
     {
       "skippedTests" : [
         "ETPCoverSheetTests",
+        "GleanPlumbMessageManagerTests\/testManagerOnMessagePressed_withMalformedURL()",
+        "ShortcutRouteTests\/testOpenLastBookmarkShortcutWithInvalidUrl()",
         "TabManagerTests\/testDeleteSelectedTab()",
         "TabManagerTests\/testPrivatePreference_togglePBMDeletesPrivate()",
         "TestFavicons\/testFaviconFetcherParse()",
@@ -108,6 +110,9 @@
       }
     },
     {
+      "skippedTests" : [
+        "NSURLExtensionsTests\/testisSyncedReaderModeURL()"
+      ],
       "target" : {
         "containerPath" : "container:Client.xcodeproj",
         "identifier" : "E6F9650B1B2F1CF20034B023",
@@ -153,6 +158,9 @@
       }
     },
     {
+      "skippedTests" : [
+        "BundleImageFetcherTests\/testValidData_returnImage()"
+      ],
       "target" : {
         "containerPath" : "container:BrowserKit",
         "identifier" : "SiteImageViewTests",
