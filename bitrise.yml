@@ -80,7 +80,7 @@ workflows:
         - deploy_path: "${BITRISE_SOURCE_DIR}/DerivedData.zip"
         - pipeline_intermediate_files: "$BITRISE_XCRESULT_PATH:BITRISE_XCRESULT_PATH"
     - script@1.1:
-        run_if: '{{getenv "RUN_UI_TESTS" | eq "Run_UI_Tests"}}'
+        run_if: 'false'
         title: Run Danger 2
         timeout: 180
         inputs:
@@ -95,6 +95,7 @@ workflows:
     - script@1.1:
         title: Detect number of warnings
         is_always_run: true
+        run_if: "false"
         inputs:
         - content: |
             set -e
@@ -114,6 +115,7 @@ workflows:
             fi
     - slack@3.1:
         is_always_run: true
+        run_if: "false"
         inputs:
         - title: ''
         - author_name: ''
@@ -144,7 +146,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   build_and_test_1_SmokeTest2:
     before_run:
     - 1_git_clone_and_post_clone
@@ -187,7 +189,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   build_and_test_2_SmokeTest:
     before_run:
     - 1_git_clone_and_post_clone
@@ -233,7 +235,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   build_and_test_3_SmokeTest3:
     before_run:
     - 1_git_clone_and_post_clone
@@ -279,7 +281,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   build_and_test_4_SmokeTest4:
     before_run:
     - 1_git_clone_and_post_clone
@@ -325,7 +327,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   send_slack_notification:
     steps:
     - slack@3.1:
@@ -753,7 +755,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   RunAllXCUITests:
     steps: []
     after_run:
@@ -765,7 +767,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   RunSmokeXCUITestsiPad:
     steps:
     - xcode-build-for-simulator@0.12:
@@ -803,7 +805,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
     before_run:
     - 1_git_clone_and_post_clone
     - 2_certificate_and_profile
@@ -826,7 +828,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
     before_run:
     - 1_git_clone_and_post_clone
     - 2_certificate_and_profile
@@ -931,7 +933,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
 
   L10nScreenshotsTests:
     steps:
@@ -993,7 +995,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   SPM_Deploy_Prod_Beta:
     steps:
     - activate-ssh-key@4.1:
@@ -1119,7 +1121,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   SPM_Deploy_Beta_Only:
     steps:
     - activate-ssh-key@4.1:
@@ -1216,7 +1218,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   SPM_Nightly_Beta_Only:
     steps:
     - activate-ssh-key@4.1:
@@ -1314,7 +1316,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   perfherder-test:
     steps:
     - cache-pull@2.1:
@@ -1360,7 +1362,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-14.3.x-ventura
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
     before_run:
     - 1_git_clone_and_post_clone
     - 2_certificate_and_profile
@@ -1637,8 +1639,8 @@ app:
 
 meta:
   bitrise.io:
-    stack: osx-xcode-14.3.x-ventura
-    machine_type_id: g2-m1.8core
+    stack: osx-xcode-15.0.x
+    machine_type_id: g2-m1-max.10core
 
 trigger_map:
 - push_branch: main
