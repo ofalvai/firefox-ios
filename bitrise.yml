@@ -44,7 +44,7 @@ workflows:
         - destination: platform=iOS Simulator,name=iPhone 14 Plus,OS=17.0
         - xcodebuild_options: '"COMPILER_INDEX_STORE_ENABLE=NO"
             "CODE_SIGN_IDENTITY=" "CODE_SIGNING_REQUIRED=NO" "CODE_SIGNING_ALLOWED=NO"'
-        - xctestrun: "/Users/vagrant/git/DerivedData/Build/Products/Fennec_UnitTest_iphonesimulator17.0.xctestrun"
+        - xctestrun: "/Users/vagrant/git/DerivedData/Build/Products/Fennec_UnitTest_iphonesimulator17.0-x86_64.xctestrun"
         - maximum_test_repetitions: 2
     - save-spm-cache@1:
         is_always_run: true
