@@ -176,12 +176,12 @@ workflows:
         timeout: 1200
         title: UI Smoketest2
         inputs:
-        - destination: platform=iOS Simulator,name=iPhone 14 Plus,OS=16.4
+        - destination: platform=iOS Simulator,name=iPhone 14 Plus,OS=17.0
         - xcodebuild_options: '"-derivedDataPath" "/Users/vagrant/git/DerivedData"
             "-parallel-testing-enabled" "NO" "-parallel-testing-worker-count" "2"
             "COMPILER_INDEX_STORE_ENABLE=NO" "CODE_SIGN_IDENTITY=" 
             "CODE_SIGNING_REQUIRED=NO" "CODE_SIGNING_ALLOWED=NO"'
-        - xctestrun: "Users/vagrant/git/DerivedData/Build/Products/Fennec_Smoketest2_iphonesimulator16.4-x86_64.xctestrun"
+        - xctestrun: "Users/vagrant/git/DerivedData/Build/Products/Fennec_Smoketest2_iphonesimulator17.0-x86_64.xctestrun"
     - deploy-to-bitrise-io@2.1.1:
         run_if: '{{getenv "RUN_UI_TESTS" | eq "Run_UI_Tests"}}'
         inputs:
@@ -222,12 +222,12 @@ workflows:
         timeout: 1200
         title: UI Smoketest
         inputs:
-        - destination: platform=iOS Simulator,name=iPhone 14 Plus,OS=16.4
+        - destination: platform=iOS Simulator,name=iPhone 14 Plus,OS=17.0
         - xcodebuild_options: '"-derivedDataPath" "/Users/vagrant/git/DerivedData"
             "-parallel-testing-enabled" "NO" "-parallel-testing-worker-count" "2"
             "COMPILER_INDEX_STORE_ENABLE=NO" "CODE_SIGN_IDENTITY=" 
             "CODE_SIGNING_REQUIRED=NO" "CODE_SIGNING_ALLOWED=NO"'
-        - xctestrun: "Users/vagrant/git/DerivedData/Build/Products/Fennec_SmokeXCUITests_iphonesimulator16.4-x86_64.xctestrun"
+        - xctestrun: "Users/vagrant/git/DerivedData/Build/Products/Fennec_SmokeXCUITests_iphonesimulator17.0-x86_64.xctestrun"
     - deploy-to-bitrise-io@2.1.1:
         run_if: '{{getenv "RUN_UI_TESTS" | eq "Run_UI_Tests"}}'
         inputs:
@@ -268,12 +268,12 @@ workflows:
         timeout: 1200
         title: UI Smoketest3
         inputs:
-        - destination: platform=iOS Simulator,name=iPhone 14 Plus,OS=16.4
+        - destination: platform=iOS Simulator,name=iPhone 14 Plus,OS=17.0
         - xcodebuild_options: '"-derivedDataPath" "/Users/vagrant/git/DerivedData"
             "-parallel-testing-enabled" "NO" "-parallel-testing-worker-count" "2"
             "COMPILER_INDEX_STORE_ENABLE=NO" "CODE_SIGN_IDENTITY=" 
             "CODE_SIGNING_REQUIRED=NO" "CODE_SIGNING_ALLOWED=NO"'
-        - xctestrun: "Users/vagrant/git/DerivedData/Build/Products/Fennec_Smoketest3_iphonesimulator16.4-x86_64.xctestrun"
+        - xctestrun: "Users/vagrant/git/DerivedData/Build/Products/Fennec_Smoketest3_iphonesimulator17.0-x86_64.xctestrun"
     - deploy-to-bitrise-io@2.1.1:
         run_if: '{{getenv "RUN_UI_TESTS" | eq "Run_UI_Tests"}}'
         inputs:
@@ -314,12 +314,12 @@ workflows:
         timeout: 1200
         title: UI Smoketest4
         inputs:
-        - destination: platform=iOS Simulator,name=iPhone 14 Plus,OS=16.4
+        - destination: platform=iOS Simulator,name=iPhone 14 Plus,OS=17.0
         - xcodebuild_options: '"-derivedDataPath" "/Users/vagrant/git/DerivedData"
             "-parallel-testing-enabled" "NO" "-parallel-testing-worker-count" "2"
             "COMPILER_INDEX_STORE_ENABLE=NO" "CODE_SIGN_IDENTITY=" 
             "CODE_SIGNING_REQUIRED=NO" "CODE_SIGNING_ALLOWED=NO"'
-        - xctestrun: "Users/vagrant/git/DerivedData/Build/Products/Fennec_Smoketest4_iphonesimulator16.4-x86_64.xctestrun"
+        - xctestrun: "Users/vagrant/git/DerivedData/Build/Products/Fennec_Smoketest4_iphonesimulator17.0-x86_64.xctestrun"
     - deploy-to-bitrise-io@2.1.1:
         run_if: '{{getenv "RUN_UI_TESTS" | eq "Run_UI_Tests"}}'
         inputs:
@@ -741,7 +741,7 @@ workflows:
         run_if: '{{getenv "NEW_XCODE_VERSION" | eq "New_Version_Found" | or (getenv "RUN_ALL_STEPS" | eq "Run_All_Steps")}}'
         inputs:
         - scheme: Fennec
-        - destination: platform=iOS Simulator,name=iPhone 14,OS=16.4
+        - destination: platform=iOS Simulator,name=iPhone 14,OS=17.0
     - deploy-to-bitrise-io@2.2: {}
     - cache-push@2.4: {}
     - slack@3.1:
@@ -779,28 +779,28 @@ workflows:
         inputs:
         - scheme: Fennec
         - test_plan: "SmokeXCUITests"
-        - destination: platform=iOS Simulator,name=iPad Pro (12.9-inch) (5th generation),OS=16.4
+        - destination: platform=iOS Simulator,name=iPad Pro (12.9-inch) (5th generation),OS=17.0
         description: This Workflow is to run SmokeTest on iPad simulator device
     - xcode-test@4.5:
         is_always_run: true
         inputs:
         - scheme: Fennec
         - test_plan: "Smoketest2"
-        - destination: platform=iOS Simulator,name=iPad Pro (12.9-inch) (5th generation),OS=16.4
+        - destination: platform=iOS Simulator,name=iPad Pro (12.9-inch) (5th generation),OS=17.0
         description: This Workflow is to run SmokeTest on iPad simulator device Smoketest2
     - xcode-test@4.5:
         is_always_run: true
         inputs:
         - scheme: Fennec
         - test_plan: "Smoketest3"
-        - destination: platform=iOS Simulator,name=iPad Pro (12.9-inch) (5th generation),OS=16.4
+        - destination: platform=iOS Simulator,name=iPad Pro (12.9-inch) (5th generation),OS=17.0
         description: This Workflow is to run SmokeTest on iPad simulator device Smoketest3
     - xcode-test@4.5:
         is_always_run: true
         inputs:
         - scheme: Fennec
         - test_plan: "Smoketest4"
-        - destination: platform=iOS Simulator,name=iPad Pro (12.9-inch) (5th generation),OS=16.4
+        - destination: platform=iOS Simulator,name=iPad Pro (12.9-inch) (5th generation),OS=17.0
         description: This Workflow is to run SmokeTest on iPad simulator device Smoketest4
     meta:
       bitrise.io:
@@ -1324,7 +1324,7 @@ workflows:
     - xcode-test@4.5:
         inputs:
         - scheme: Fennec
-        - destination: platform=iOS Simulator,name=iPhone 14,OS=16.4
+        - destination: platform=iOS Simulator,name=iPhone 14,OS=17.0
         - test_plan: PerformanceTestPlan   
     - script@1.1:
         is_always_run: true
@@ -1506,7 +1506,7 @@ workflows:
             ls /Users/vagrant/git/DerivedData/Build/Products
 
             cd DerivedData/Build/Products
-            zip -r Fennec_Enterprise.zip Fennec_Enterprise-iphoneos Fennec_Enterprise_PerformanceTestPlan_iphoneos16.4-arm64.xctestrun
+            zip -r Fennec_Enterprise.zip Fennec_Enterprise-iphoneos Fennec_Enterprise_PerformanceTestPlan_iphoneos17.0-arm64.xctestrun
             mv Fennec_Enterprise.zip /Users/vagrant/git/Fennec_Enterprise.zip
     - cache-pull@2.7.2:
         inputs:
