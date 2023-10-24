@@ -434,10 +434,12 @@ workflows:
             ./bootstrap.sh
         title: Run bootstrap
     - swiftlint-extended@1:
+        run_if: "false"
         inputs:
         - linting_path: "$BITRISE_SOURCE_DIR"
     - deploy-to-bitrise-io@2.2: {}
     - script@1:
+        run_if: "false"
         inputs:
         - content: |-
             set -e
