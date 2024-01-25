@@ -152,7 +152,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   build_and_test_1_SmokeTest2:
     before_run:
     - 0_detect_standalone_build
@@ -195,7 +195,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   build_and_test_2_SmokeTest:
     before_run:
     - 0_detect_standalone_build
@@ -241,7 +241,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   build_and_test_3_SmokeTest3:
     before_run:
     - 0_detect_standalone_build
@@ -287,7 +287,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   build_and_test_4_SmokeTest4:
     before_run:
     - 0_detect_standalone_build
@@ -333,7 +333,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   send_slack_notification:
     steps:
     - slack@3.1:
@@ -724,7 +724,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
 
   L10nBuild:
     steps:
@@ -825,7 +825,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
 
   L10nScreenshotsTests:
     steps:
@@ -888,7 +888,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   SPM_Deploy_Prod_Beta:
     steps:
     - activate-ssh-key@4.1:
@@ -1016,7 +1016,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   SPM_Deploy_Beta_Only:
     steps:
     - activate-ssh-key@4.1:
@@ -1114,7 +1114,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   SPM_Nightly_Beta_Only:
     steps:
     - activate-ssh-key@4.1:
@@ -1213,7 +1213,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
   Bitrise_Performance_Test:
     steps:
     - cache-pull@2.1:
@@ -1260,7 +1260,7 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-15.2.x
-        machine_type_id: g2-m1.8core
+        machine_type_id: g2-m1-max.10core
     before_run:
     - 1_git_clone_and_post_clone
     - 2_certificate_and_profile
@@ -1604,7 +1604,7 @@ app:
 meta:
   bitrise.io:
     stack: osx-xcode-15.2.x
-    machine_type_id: g2-m1.8core
+    machine_type_id: g2-m1-max.10core
 
 trigger_map:
 - push_branch: main
