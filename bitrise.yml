@@ -364,6 +364,12 @@ workflows:
     - script@1:
         inputs:
         - content: |-
+            set -ex
+
+            sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceMicrophone','com.apple.CoreSimulator.SimulatorTrampoline',1,2,4,1,NULL,NULL,0,'UNUSED',NULL,0,$(date +%s),NULL,NULL,'UNUSED',$(date +%s));"
+    - script@1:
+        inputs:
+        - content: |-
             #!/usr/bin/env bash
             set -e
 
