@@ -366,7 +366,7 @@ workflows:
         - content: |-
             set -ex
 
-            sudo sqlite3 "/Users/vagrant/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceMicrophone', 'com.apple.CoreSimulator.SimulatorTrampoline', 1, 2, 4, 1, NULL, NULL, 0, 'UNUSED', NULL, 0, 1706695374, NULL, NULL, 'UNUSED', 1706695374);"
+            sudo sqlite3 "/Users/vagrant/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceMicrophone', 'com.apple.CoreSimulator.SimulatorTrampoline', 0, 2, 2, 1, NULL, NULL, 0, 'UNUSED', NULL, 0, 1706695374, NULL, NULL, 'UNUSED', 1706695374);"
     - script@1:
         inputs:
         - content: |-
