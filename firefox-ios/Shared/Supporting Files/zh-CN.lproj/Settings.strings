@@ -44,13 +44,13 @@
 "CreditCards.Settings.ManageCards.v112" = "管理卡片";
 
 /* When a user is in the process of making a purchase, and has at least one saved card, we show this label used as a title. This indicates to the user that there are stored cards available for use on this pending purchase. */
-"CreditCards.Settings.UseASavedCard.v112" = "要使用已保存的卡片吗？";
+"CreditCards.Settings.UseASavedCard.v112" = "要使用保存的卡片吗？";
 
 /* When a user is in the process of making a purchase, and has at least one saved card, we show this label used as a title. This indicates to the user that there are stored cards available for use on this pending purchase. */
 "CreditCards.Settings.UseASavedCard.v122" = "使用保存的信用卡";
 
 /* When a user is in the process of making a purchase, and has at least one saved card, we show this label inside the keyboard hint. This indicates to the user that there are stored cards available for use on this pending purchase. */
-"CreditCards.Settings.UseSavedCardFromKeyboard.v112" = "使用已保存的卡片";
+"CreditCards.Settings.UseSavedCardFromKeyboard.v112" = "使用保存的卡片";
 
 /* Settings section title for the old Firefox account */
 "FxA.FirefoxAccount.v119" = "账户";
