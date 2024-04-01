@@ -89,7 +89,7 @@
 "Settings.Notifications.TurnOnNotificationsTitle.v112" = "Увімкніть сповіщення";
 
 /* Accessibility label for default search engine setting. */
-"Settings.Search.Accessibility.DefaultSearchEngine.v121" = "Типовий засіб пошуку";
+"Settings.Search.Accessibility.DefaultSearchEngine.v121" = "Типова пошукова система";
 
 /* Accessibility label for Learn more about Firefox Suggest. */
 "Settings.Search.Accessibility.LearnAboutSuggestions.v124" = "Докладніше про Пропозиції Firefox";
@@ -98,7 +98,7 @@
 "Settings.Search.DefaultSearchEngine.Footer.v122" = "Результати на основі пошуку, історії, закладок тощо";
 
 /* Title for the `default search engine` settings section in the Search page in the Settings menu. */
-"Settings.Search.DefaultSearchEngine.Title.v121" = "Типовий засіб пошуку";
+"Settings.Search.DefaultSearchEngine.Title.v121" = "Типова пошукова система";
 
 /* Navigation title for search page in the Settings menu. */
 "Settings.Search.PageTitle.v121" = "Пошук";
@@ -110,7 +110,7 @@
 "Settings.Search.PrivateSession.Title.v122" = "Приватний перегляд";
 
 /* Title for quick-search engines settings section in the Search page in the Settings menu. */
-"Settings.Search.QuickEnginesTitle.v121" = "Швидкі засоби пошуку";
+"Settings.Search.QuickEnginesTitle.v121" = "Системи швидкого пошуку";
 
 /* Label for the `show search suggestions` setting, in the Search Settings page. */
 "Settings.Search.ShowSuggestions.v121" = "Пошукові пропозиції";
@@ -129,7 +129,4 @@
 
 /* In the Search page of the Settings menu, the description for the setting to enable Suggestions from sponsors. Placeholder is for the app name - Firefox. */
 "Settings.Search.Suggest.ShowSponsoredSuggestions.Description.v124" = "Підтримайте %@ за допомогою періодичних спонсорованих пропозицій";
-
-/* In the Search page of the Settings menu, the title for the setting to enable Suggestions from sponsors. */
-"Settings.Search.Suggest.ShowSponsoredSuggestions.Title.v124" = "Пропозиції від спонсорів";
 
