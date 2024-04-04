@@ -7,7 +7,7 @@ import { FormAutofill } from "resource://autofill/FormAutofill.sys.mjs";
 
 const lazy = {};
 ChromeUtils.defineESModuleGetters(lazy, {
-  AutofillTelemetry: "resource://autofill/AutofillTelemetry.sys.mjs",
+  AutofillTelemetry: "resource://gre/modules/shared/AutofillTelemetry.sys.mjs",
   CreditCard: "resource://gre/modules/CreditCard.sys.mjs",
   FormAutofillNameUtils:
     "resource://gre/modules/shared/FormAutofillNameUtils.sys.mjs",
@@ -79,40 +79,40 @@ export class FormAutofillSection {
    * Examine the section is createable for storing the profile. This method
    * must be overrided.
    *
-   * @param {Object} record The record for examining createable
+   * @param {Object} _record The record for examining createable
    * @returns {boolean} True for the record is createable, otherwise false
    *
    */
-  isRecordCreatable(record) {
+  isRecordCreatable(_record) {
     throw new TypeError("isRecordCreatable method must be overridden");
   }
 
   /**
    * Override this method if the profile is needed to apply some transformers.
    *
-   * @param {object} profile
+   * @param {object} _profile
    *        A profile should be converted based on the specific requirement.
    */
-  applyTransformers(profile) {}
+  applyTransformers(_profile) {}
 
   /**
    * Override this method if the profile is needed to be customized for
    * previewing values.
    *
-   * @param {object} profile
+   * @param {object} _profile
    *        A profile for pre-processing before previewing values.
    */
-  preparePreviewProfile(profile) {}
+  preparePreviewProfile(_profile) {}
 
   /**
    * Override this method if the profile is needed to be customized for filling
    * values.
    *
-   * @param {object} profile
+   * @param {object} _profile
    *        A profile for pre-processing before filling values.
    * @returns {boolean} Whether the profile should be filled.
    */
-  async prepareFillingProfile(profile) {
+  async prepareFillingProfile(_profile) {
     return true;
   }
 
@@ -136,15 +136,15 @@ export class FormAutofillSection {
    * specific case. Return the original value in the default case.
    * @param {String} value
    *        The original field value.
-   * @param {Object} fieldDetail
+   * @param {Object} _fieldName
    *        A fieldDetail of the related element.
-   * @param {HTMLElement} element
+   * @param {HTMLElement} _element
    *        A element for checking converting value.
    *
    * @returns {String}
    *          A string of the converted value.
    */
-  computeFillingValue(value, fieldName, element) {
+  computeFillingValue(value, _fieldName, _element) {
     return value;
   }
 
@@ -174,28 +174,26 @@ export class FormAutofillSection {
       this._cacheValue.matchingSelectOption = new WeakMap();
     }
 
-    for (let fieldName in profile) {
-      let fieldDetail = this.getFieldDetailByName(fieldName);
-      if (!fieldDetail) {
-        continue;
-      }
+    for (const fieldName in profile) {
+      const fieldDetail = this.getFieldDetailByName(fieldName);
+      const element = fieldDetail?.element;
 
-      let element = fieldDetail.element;
       if (!HTMLSelectElement.isInstance(element)) {
         continue;
       }
 
-      let cache = this._cacheValue.matchingSelectOption.get(element) || {};
-      let value = profile[fieldName];
+      const cache = this._cacheValue.matchingSelectOption.get(element) || {};
+      const value = profile[fieldName];
       if (cache[value] && cache[value].deref()) {
         continue;
       }
 
-      let option = FormAutofillUtils.findSelectOption(
+      const option = FormAutofillUtils.findSelectOption(
         element,
         profile,
         fieldName
       );
+
       if (option) {
         cache[value] = new WeakRef(option);
         this._cacheValue.matchingSelectOption.set(element, cache);
@@ -204,9 +202,14 @@ export class FormAutofillSection {
           delete cache[value];
           this._cacheValue.matchingSelectOption.set(element, cache);
         }
-        // Delete the field so the phishing hint won't treat it as a "also fill"
-        // field.
-        delete profile[fieldName];
+        // Skip removing cc-type since this is needed for displaying the icon for credit card network
+        // TODO(Bug 1874339): Cleanup transformation and normalization of data to not remove any
+        // fields and be more consistent
+        if (!["cc-type"].includes(fieldName)) {
+          // Delete the field so the phishing hint won't treat it as a "also fill"
+          // field.
+          delete profile[fieldName];
+        }
       }
     }
   }
@@ -323,6 +326,7 @@ export class FormAutofillSection {
       throw new Error("No fieldDetail for the focused input.");
     }
 
+    this.getAdaptedProfiles([profile]);
     if (!(await this.prepareFillingProfile(profile))) {
       this.log.debug("profile cannot be filled");
       return false;
@@ -842,6 +846,10 @@ export class FormAutofillAddressSection extends FormAutofillSection {
         value =
           FormAutofillUtils.getAbbreviatedSubregionName([value, text]) || text;
       }
+    } else if (fieldDetail.fieldName == "country") {
+      // This is a temporary fix. Ideally we should have either case-insensitive comparaison of country codes
+      // or handle this elsewhere see Bug 1889234 for more context.
+      value = value.toUpperCase();
     }
     return value;
   }
@@ -880,7 +888,7 @@ export class FormAutofillCreditCardSection extends FormAutofillSection {
     }
   }
 
-  _handlePageHide(event) {
+  _handlePageHide(_event) {
     this.handler.window.removeEventListener(
       "pagehide",
       this._handlePageHide.bind(this)
@@ -1283,15 +1291,6 @@ export class FormAutofillCreditCardSection extends FormAutofillSection {
 
       profile["cc-number"] = decrypted;
     }
-    return true;
-  }
-
-  async autofillFields(profile) {
-    this.getAdaptedProfiles([profile]);
-    if (!(await super.autofillFields(profile))) {
-      return false;
-    }
-
     return true;
   }
 }
