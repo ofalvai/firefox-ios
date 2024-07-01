@@ -121,6 +121,9 @@
 /* Text for the disclaimer that appears underneath the rating image of the Shopping Experience Opt In onboarding Card (Fakespot). The parameter will be replaced by the Fakespot app name. After the colon, what appears are two links, each on their own line. The first link is to a Privacy policy. The second link is to Terms of use. */
 "Shopping.OptInCard.Disclaimer.Text.v120" = "A selezzione di « Sì, pruvallu » vole dì chì vo accettate quell’elementi di %@ :";
 
+/* Text for the disclaimer that appears underneath the rating image of the Shopping Experience Opt In onboarding Card (Fakespot). After the colon, there will be two links, each on their own line. The first link is to a Privacy policy. The second link is to Terms of use. */
+"Shopping.OptInCard.Disclaimer.Text.v123" = "A selezzione di « Sì, pruvallu » vole dì chì vo accettate st’elementi :";
+
 /* Label for the first paragraph of the Shopping Experience Opt In onboarding Card (Fakespot). The first parameter will be the website the user is coming from when viewing this screen (default Amazon). The second parameter will be replaced by the app name. This string is almost identical with 'Shopping.OptInCard.FirstParagraph.Description', but without Best Buy and Walmart websites, which are not available in many locales. */
 "Shopping.OptInCard.FirstParagraph.AmazonOnly.Description.v122" = "Fighjate quantu sò degni di cunfidenza l‘avisi di prudutti nant’à %1$@ prima di cumprà. U verificadore d’avisu, una funzione esperimentale da %2$@, hè integratu direttamente in u navigatore.";
 
@@ -203,13 +206,13 @@
 "Shopping.ReviewQualityCard.UnreliableReviews.Label.v120" = "Avisi micca degni di cunfidenza. Pensemu chì l’avisi sò sicuramente falsi o ch’elli venenu da persone partigiane.";
 
 /* Accessibility label for the up chevron icon used to collapse or minimize the Settings Card within the shopping product review bottom sheet. */
-"Shopping.SettingsCard.Collapse.AccessibilityLabel.v120" = "Riduce a scheda di e preferenze";
+"Shopping.SettingsCard.Collapse.AccessibilityLabel.v120" = "Riduce a scheda di i parametri";
 
 /* Accessibility label for the down chevron icon used to expand or show the details of the Settings Card within the shopping product review bottom sheet. */
-"Shopping.SettingsCard.Expand.AccessibilityLabel.v120" = "Sviluppà a scheda di e preferenze";
+"Shopping.SettingsCard.Expand.AccessibilityLabel.v120" = "Sviluppà a scheda di i parametri";
 
 /* Accessibility hint for the recommended products label and switch, grouped together. When the group is selected in VoiceOver mode, the hint is read to help the user understand what action can be performed. */
-"Shopping.SettingsCard.Expand.GroupedRecommendedProductsAndSwitch.AccessibilityHint.v123" = "Picchichjà duie volte per cambià e preferenze.";
+"Shopping.SettingsCard.Expand.GroupedRecommendedProductsAndSwitch.AccessibilityHint.v123" = "Picchichjà duie volte per cambià i parametri.";
 
 /* Accessibility label for the recommended products label and switch, grouped together. The first placeholder is for the recommended products label, and the second placeholder is for the state of the switch: On/Off. */
 "Shopping.SettingsCard.Expand.GroupedRecommendedProductsAndSwitch.AccessibilityLabel.v123" = "%1$@, buttone per cambià, %2$@.";
@@ -218,7 +221,7 @@
 "Shopping.SettingsCard.Footer.Action.v120" = "U verificadore d’avisu funziuneghja grazia à %1$@ da %2$@";
 
 /* Title of the settings card displayed in the shopping review quality bottom sheet. */
-"Shopping.SettingsCard.Label.Title.v120" = "Preferenze";
+"Shopping.SettingsCard.Label.Title.v120" = "Parametri";
 
 /* Label of the switch from settings card displayed in the shopping review quality bottom sheet. The placeholder will be replaced with the app name. */
 "Shopping.SettingsCard.RecommendedProducts.Label.v120" = "Affissà i prudutti ricumandati da %@";
