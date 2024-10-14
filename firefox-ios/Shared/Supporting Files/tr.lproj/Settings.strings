@@ -1,17 +1,8 @@
-/* On the autofill settings screen, a label under the title label to add additional context for user in regards to what the toggle switch that allow saving and autofilling of addresses for webpages does, letting users know that this action includes phone numbers and email addresses. */
-"Addresses.Settings.EditCard.Switch.Description.v124" = "Telefon numaraları ve e-posta adresleri de dahildir";
-
-/* Title label for user to use the toggle settings to allow saving and autofilling of addresses for webpages. */
-"Addresses.Settings.EditCard.Switch.Title.v124" = "Adresleri kaydedip doldurun";
-
 /* Accessibility label for the add button in autofill settings screen. Pressing this button presents a modal that allows users to add a card by entering the credit card information. */
 "CreditCard.Settings.AddCard.AccessibilityLabel.v121" = "Kart ekle";
 
 /* Description label for when there are no credit cards shown in credit card list in autofill settings screen. */
 "CreditCard.Settings.EmptyListDescription.v112" = "Daha hızlı ödeme yapmak için kart bilgilerinizi güvenli bir şekilde kaydedebilirsiniz.";
-
-/* Title label for when there are no credit cards shown in credit card list in autofill settings screen. %@ is the product name and should not be altered. */
-"CreditCard.Settings.EmptyListTitle.v112" = "Kredi kartlarını %@ tarayıcısına kaydet";
 
 /* Title label for when there are no credit cards shown in credit card list in autofill settings screen. %@ is the product name and should not be altered. */
 "CreditCard.Settings.EmptyListTitle.v122" = "Kartları %@ uygulamasına kaydet";
@@ -20,25 +11,13 @@
 "CreditCard.Settings.ListItemA11y.v118" = "%1$@, sahibi %2$@, son 4 rakamı %3$@, son kullanma tarihi %4$@";
 
 /* When a user is in the process or has finished making a purchase with a card not saved in Firefox's list of stored cards, we ask the user if they would like to save this card for future purchases. This string indicates to users that they can deny Firefox from remembering the card that is being used. */
-"CreditCard.Settings.NotNow.v112" = "Şimdi değil";
-
-/* When a user is in the process or has finished making a purchase with a card not saved in Firefox's list of stored cards, we ask the user if they would like to save this card for future purchases. This string indicates to users that they can deny Firefox from remembering the card that is being used. */
 "CreditCard.Settings.NotNow.v122" = "Şimdi değil";
-
-/* When a user is in the process or has finished making a purchase with a card not saved in Firefox's list of stored cards, we ask the user if they would like to save this card for future purchases. This string is a title string of the overall message that asks the user if they would like Firefox to remember the card that is being used. */
-"CreditCard.Settings.RememberThisCard.v112" = "Bu kart hatırlansın mı?";
 
 /* When a user is in the process or has finished making a purchase with a card not saved in Firefox's list of stored cards, we ask the user if they would like to save this card for future purchases. This string is a title string of the overall message that asks the user if they would like Firefox to remember the card that is being used. */
 "CreditCard.Settings.RememberThisCard.v122" = "Bu kart güvenli bir şekilde kaydedilsin mi?";
 
 /* When a user is in the process or has finished making a purchase with a remembered card, and if the credit card information doesn't match the contents of the stored information of that card, we show this string. We ask this user if they would like Firefox update the staled information of that credit card. */
-"CreditCard.Settings.UpdateThisCard.v112" = "Bu kart güncellensin mi?";
-
-/* When a user is in the process or has finished making a purchase with a remembered card, and if the credit card information doesn't match the contents of the stored information of that card, we show this string. We ask this user if they would like Firefox update the staled information of that credit card. */
 "CreditCard.Settings.UpdateThisCard.v122" = "Kart güncellensin mi?";
-
-/* When a user is in the process or has finished making a purchase with a card not saved in Firefox's list of stored cards, we ask the user if they would like to save this card for future purchases. This string asks users to confirm if they would like Firefox to remember the card that is being used. */
-"CreditCard.Settings.Yes.v112" = "Evet";
 
 /* When a user is in the process or has finished making a purchase with a card not saved in Firefox's list of stored cards, we ask the user if they would like to save this card for future purchases. This string asks users to confirm if they would like Firefox to remember the card that is being used. */
 "CreditCard.Settings.Yes.v122" = "Güncelle";
@@ -48,9 +27,6 @@
 
 /* When a user is in the process or has finished making a purchase, and has at least one card saved, we show this tappable string. This indicates to users that they can navigate to their list of stored credit cards in the app's credit card list screen. */
 "CreditCards.Settings.ManageCards.v112" = "Kartları yönet";
-
-/* When a user is in the process of making a purchase, and has at least one saved card, we show this label used as a title. This indicates to the user that there are stored cards available for use on this pending purchase. */
-"CreditCards.Settings.UseASavedCard.v112" = "Kayıtlı bir kart kullanılsın mı?";
 
 /* When a user is in the process of making a purchase, and has at least one saved card, we show this label used as a title. This indicates to the user that there are stored cards available for use on this pending purchase. */
 "CreditCards.Settings.UseASavedCard.v122" = "Kayıtlı kartı kullan";
@@ -135,7 +111,4 @@
 
 /* In the Search page of the Settings menu, the description for the setting to enable Suggestions from sponsors. Placeholder is for the app name - Firefox. */
 "Settings.Search.Suggest.ShowSponsoredSuggestions.Description.v124" = "Ara sıra görünecek sponsorlu önerilerle %@ tarayıcınızı destekleyin";
-
-/* In the Search page of the Settings menu, the title for the setting to enable Suggestions from sponsors. */
-"Settings.Search.Suggest.ShowSponsoredSuggestions.Title.v124" = "Sponsorlardan öneriler";
 
