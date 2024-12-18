@@ -4,6 +4,7 @@
 
 import { XPCOMUtils } from "resource://gre/modules/XPCOMUtils.sys.mjs";
 import { Region } from "resource://gre/modules/Region.sys.mjs";
+import { AddressMetaDataLoader } from "resource://gre/modules/shared/AddressMetaDataLoader.sys.mjs";
 
 const AUTOFILL_ADDRESSES_AVAILABLE_PREF =
   "extensions.formautofill.addresses.supported";
@@ -17,14 +18,14 @@ const ENABLED_AUTOFILL_ADDRESSES_PREF =
   "extensions.formautofill.addresses.enabled";
 const ENABLED_AUTOFILL_ADDRESSES_CAPTURE_PREF =
   "extensions.formautofill.addresses.capture.enabled";
-const ENABLED_AUTOFILL_ADDRESSES_CAPTURE_V2_PREF =
-  "extensions.formautofill.addresses.capture.v2.enabled";
+const ENABLED_AUTOFILL_ADDRESSES_CAPTURE_REQUIRED_FIELDS_PREF =
+  "extensions.formautofill.addresses.capture.requiredFields";
 const ENABLED_AUTOFILL_ADDRESSES_SUPPORTED_COUNTRIES_PREF =
   "extensions.formautofill.addresses.supportedCountries";
 const ENABLED_AUTOFILL_CREDITCARDS_PREF =
   "extensions.formautofill.creditCards.enabled";
-const ENABLED_AUTOFILL_CREDITCARDS_REAUTH_PREF =
-  "extensions.formautofill.reauth.enabled";
+const AUTOFILL_CREDITCARDS_REAUTH_PREF =
+  "extensions.formautofill.creditCards.reauth.optout";
 const AUTOFILL_CREDITCARDS_HIDE_UI_PREF =
   "extensions.formautofill.creditCards.hideui";
 const FORM_AUTOFILL_SUPPORT_RTL_PREF = "extensions.formautofill.supportRTL";
@@ -32,19 +33,21 @@ const AUTOFILL_CREDITCARDS_AUTOCOMPLETE_OFF_PREF =
   "extensions.formautofill.creditCards.ignoreAutocompleteOff";
 const AUTOFILL_ADDRESSES_AUTOCOMPLETE_OFF_PREF =
   "extensions.formautofill.addresses.ignoreAutocompleteOff";
-const ENABLED_AUTOFILL_CAPTURE_ON_FORM_REMOVAL =
+const ENABLED_AUTOFILL_CAPTURE_ON_FORM_REMOVAL_PREF =
   "extensions.formautofill.heuristics.captureOnFormRemoval";
-const ENABLED_AUTOFILL_CAPTURE_ON_PAGE_NAVIGATION =
+const ENABLED_AUTOFILL_CAPTURE_ON_PAGE_NAVIGATION_PREF =
   "extensions.formautofill.heuristics.captureOnPageNavigation";
+const ENABLED_AUTOFILL_SAME_ORIGIN_WITH_TOP =
+  "extensions.formautofill.heuristics.autofillSameOriginWithTop";
 
 export const FormAutofill = {
   ENABLED_AUTOFILL_ADDRESSES_PREF,
   ENABLED_AUTOFILL_ADDRESSES_CAPTURE_PREF,
-  ENABLED_AUTOFILL_ADDRESSES_CAPTURE_V2_PREF,
-  ENABLED_AUTOFILL_CAPTURE_ON_FORM_REMOVAL,
-  ENABLED_AUTOFILL_CAPTURE_ON_PAGE_NAVIGATION,
+  ENABLED_AUTOFILL_CAPTURE_ON_FORM_REMOVAL_PREF,
+  ENABLED_AUTOFILL_CAPTURE_ON_PAGE_NAVIGATION_PREF,
+  ENABLED_AUTOFILL_SAME_ORIGIN_WITH_TOP,
   ENABLED_AUTOFILL_CREDITCARDS_PREF,
-  ENABLED_AUTOFILL_CREDITCARDS_REAUTH_PREF,
+  AUTOFILL_CREDITCARDS_REAUTH_PREF,
   AUTOFILL_CREDITCARDS_AUTOCOMPLETE_OFF_PREF,
   AUTOFILL_ADDRESSES_AUTOCOMPLETE_OFF_PREF,
 
@@ -81,7 +84,9 @@ export const FormAutofill = {
     return false;
   },
   isAutofillAddressesAvailableInCountry(country) {
-    return FormAutofill._addressAutofillSupportedCountries.includes(country);
+    return FormAutofill._addressAutofillSupportedCountries.includes(
+      country.toUpperCase()
+    );
   },
   get isAutofillEnabled() {
     return this.isAutofillAddressesEnabled || this.isAutofillCreditCardsEnabled;
@@ -101,13 +106,24 @@ export const FormAutofill = {
   /**
    * Determines if the address autofill feature is available to use in the browser.
    * If the feature is not available, then there are no user facing ways to enable it.
+   * Two conditions must be met for the autofill feature to be considered available:
+   *   1. Address autofill support is confirmed when:
+   *      - `extensions.formautofill.addresses.supported` is set to `on`.
+   *      - The user is located in a region supported by the feature
+   *        (`extensions.formautofill.creditCards.supportedCountries`).
+   *   2. Address autofill is enabled through a Nimbus experiment:
+   *      - The experiment pref `extensions.formautofill.addresses.experiments.enabled` is set to true.
    *
    * @returns {boolean} `true` if address autofill is available
    */
   get isAutofillAddressesAvailable() {
-    return this._isSupportedRegion(
+    const isUserInSupportedRegion = this._isSupportedRegion(
       FormAutofill._isAutofillAddressesAvailable,
       FormAutofill._addressAutofillSupportedCountries
+    );
+    return (
+      isUserInSupportedRegion ||
+      FormAutofill._isAutofillAddressesAvailableInExperiment
     );
   },
   /**
@@ -175,6 +191,10 @@ export const FormAutofill = {
       prefix: logPrefix,
     });
   },
+
+  get isMLExperimentEnabled() {
+    return FormAutofill._isMLEnabled && FormAutofill._isMLExperimentEnabled;
+  },
 };
 
 // TODO: Bug 1747284. Use Region.home instead of reading "browser.serach.region"
@@ -207,11 +227,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
   FormAutofill,
   "isAutofillAddressesCaptureEnabled",
   ENABLED_AUTOFILL_ADDRESSES_CAPTURE_PREF
-);
-XPCOMUtils.defineLazyPreferenceGetter(
-  FormAutofill,
-  "isAutofillAddressesCaptureV2Enabled",
-  ENABLED_AUTOFILL_ADDRESSES_CAPTURE_V2_PREF
 );
 XPCOMUtils.defineLazyPreferenceGetter(
   FormAutofill,
@@ -261,25 +276,47 @@ XPCOMUtils.defineLazyPreferenceGetter(
 XPCOMUtils.defineLazyPreferenceGetter(
   FormAutofill,
   "captureOnFormRemoval",
-  ENABLED_AUTOFILL_CAPTURE_ON_FORM_REMOVAL
+  ENABLED_AUTOFILL_CAPTURE_ON_FORM_REMOVAL_PREF
 );
 XPCOMUtils.defineLazyPreferenceGetter(
   FormAutofill,
   "captureOnPageNavigation",
-  ENABLED_AUTOFILL_CAPTURE_ON_PAGE_NAVIGATION
+  ENABLED_AUTOFILL_CAPTURE_ON_PAGE_NAVIGATION_PREF
+);
+XPCOMUtils.defineLazyPreferenceGetter(
+  FormAutofill,
+  "addressCaptureRequiredFields",
+  ENABLED_AUTOFILL_ADDRESSES_CAPTURE_REQUIRED_FIELDS_PREF,
+  null,
+  null,
+  val => val?.split(",").filter(v => !!v)
+);
+XPCOMUtils.defineLazyPreferenceGetter(
+  FormAutofill,
+  "autofillSameOriginWithTop",
+  ENABLED_AUTOFILL_SAME_ORIGIN_WITH_TOP
 );
 
-// XXX: This should be invalidated on intl:app-locales-changed.
-ChromeUtils.defineLazyGetter(FormAutofill, "countries", () => {
-  let availableRegionCodes =
-    Services.intl.getAvailableLocaleDisplayNames("region");
-  let displayNames = Services.intl.getRegionDisplayNames(
-    undefined,
-    availableRegionCodes
-  );
-  let result = new Map();
-  for (let i = 0; i < availableRegionCodes.length; i++) {
-    result.set(availableRegionCodes[i].toUpperCase(), displayNames[i]);
-  }
-  return result;
-});
+XPCOMUtils.defineLazyPreferenceGetter(
+  FormAutofill,
+  "_isAutofillAddressesAvailableInExperiment",
+  "extensions.formautofill.addresses.experiments.enabled"
+);
+
+XPCOMUtils.defineLazyPreferenceGetter(
+  FormAutofill,
+  "_isMLEnabled",
+  "browser.ml.enable",
+  false
+);
+
+XPCOMUtils.defineLazyPreferenceGetter(
+  FormAutofill,
+  "_isMLExperimentEnabled",
+  "extensions.formautofill.ml.experiment.enabled",
+  false
+);
+
+ChromeUtils.defineLazyGetter(FormAutofill, "countries", () =>
+  AddressMetaDataLoader.getCountries()
+);
