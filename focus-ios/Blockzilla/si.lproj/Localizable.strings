@@ -181,6 +181,12 @@
 /* Button label used to close a menu that displays as a popup. */
 "Menu.Close" = "වසන්න";
 
+/* Error message shown when no internet connection is available */
+"Network.Offline.ErrorMessage" = "අන්තර්ජාල සම්බන්‍ධතාව නැති බව පෙනෙයි.";
+
+/* Button text for retrying network connection */
+"Network.Offline.RetryButton" = "නැවත";
+
 /* Text for a label that indicates the title of button from onboarding screen version 2. */
 "NewOnboarding.Button.Title.V2" = "පටන් ගන්න";
 
