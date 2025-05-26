@@ -181,6 +181,12 @@
 /* Button label used to close a menu that displays as a popup. */
 "Menu.Close" = "Chjode";
 
+/* Error message shown when no internet connection is available */
+"Network.Offline.ErrorMessage" = "Pare chì a cunnessione internet ùn sia micca attiva.";
+
+/* Button text for retrying network connection */
+"Network.Offline.RetryButton" = "Pruvà torna";
+
 /* Text for a label that indicates the title of button from onboarding screen version 2. */
 "NewOnboarding.Button.Title.V2" = "Principià";
 
@@ -668,7 +674,7 @@
 "URL.paste" = "Incullà";
 
 /* Placeholder text shown in the URL bar before the user navigates to a page */
-"URL.placeholderText" = "Ricerca o indirizzu";
+"URL.placeholderText" = "Circà o stampittà un indirizzu";
 
 /* Label displayed for search button when typing in the URL bar. %@ is the text type by the user. */
 "URL.searchLabel" = "Circà %@";
