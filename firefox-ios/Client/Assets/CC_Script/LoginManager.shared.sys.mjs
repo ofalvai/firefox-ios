@@ -20,13 +20,14 @@ class Logic {
 
   /**
    * Test whether the element has the keyword in its attributes.
-   * The tested attributes include id, name, className, and placeholder.
+   * The tested attributes include id, name, className, ariaLabel and placeholder.
    */
   static elementAttrsMatchRegex(element, regex) {
     if (
       regex.test(element.id) ||
       regex.test(element.name) ||
-      regex.test(element.className)
+      regex.test(element.className) ||
+      regex.test(element.ariaLabel ?? "")
     ) {
       return true;
     }
@@ -41,6 +42,10 @@ class Logic {
    */
   static hasLabelMatchingRegex(element, regex) {
     return regex.test(element.labels?.[0]?.textContent);
+  }
+
+  static hasTextContentMatchingRegex(element, regex) {
+    return regex.test(element.textContent);
   }
 
   /**
@@ -88,11 +93,11 @@ class Logic {
    *
    * @param {Element} element
    *                  the field we want to check.
-   * @param {Object} options
+   * @param {object} options
    * @param {bool} [options.ignoreConnect] - Whether to ignore checking isConnected
    *                                         of the element.
    *
-   * @returns {Boolean} true if the field type is one
+   * @returns {boolean} true if the field type is one
    *                    of the username types.
    */
   static isUsernameFieldType(element, { ignoreConnect = false } = {}) {
@@ -138,11 +143,11 @@ class Logic {
    *
    * @param {Element} element
    *                  the field we want to check.
-   * @param {Object} options
+   * @param {object} options
    * @param {bool} [options.ignoreConnect] - Whether to ignore checking isConnected
    *                                         of the element.
    *
-   * @returns {Boolean} true if the field can
+   * @returns {boolean} true if the field can
    *                    be treated as a password input
    */
   static isPasswordFieldType(element, { ignoreConnect = false } = {}) {
@@ -253,10 +258,11 @@ class Logic {
   /**
    * Transforms the parsed rules returned from PasswordRulesParser into a Map for easier access.
    * The returned Map could have the following keys: "allowed", "required", "maxlength", "minlength", and "max-consecutive"
+   *
    * @example
    * // Returns a Map with a key-value pair of "allowed": "ascii-printable"
    * transformRulesToMap([{ _name: "allowed", value: [{ _name: "ascii-printable" }] }])
-   * @param {Object[]} rules rules from PasswordRulesParser.parsePasswordRules
+   * @param {object[]} rules rules from PasswordRulesParser.parsePasswordRules
    * @return {Map} mapped rules
    */
   static transformRulesToMap(rules) {
